@@ -44,25 +44,35 @@ h1 {
     margin: 5rem 1rem 1rem;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 auto 3rem;
-    max-width: 720px;
+p {
+    max-width: 800px;
+    margin: 0.75rem auto;
+    padding: 0 1.5rem;
+    font-size: 1.05rem;
 }
 
-li {
-    background: #ffffff;
-    border-radius: 0.75rem;
+h2 {
+    max-width: 800px;
+    margin: 2rem auto 0.75rem;
+    padding: 0 1.5rem;
+    font-size: 1.6rem;
+}
+
+details {
+    max-width: 800px;
+    margin: 1.25rem auto 3rem;
     padding: 1rem 1.2rem;
-    margin: 1.1rem 1rem;
+    border-radius: 0.75rem;
+    background: #ffffff;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
-    font-size: 1.1rem;
-    transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
 }
 
-li:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
-    background: #f7f7f7;
+summary {
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+details p {
+    padding: 0;
+    margin: 0.6rem 0 0;
 }
