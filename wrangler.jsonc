@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "1n2-minecraft",
+  "name": "1n2-mc-server",
   "compatibility_date": "2025-09-27",
   "observability": {
     "enabled": true
