@@ -76,3 +76,9 @@ details p {
     padding: 0;
     margin: 0.6rem 0 0;
 }
+
+.funny-text-bottom {
+    text-align: center;
+    bottom: 0;
+    margin-bottom: 1rem;
+}
