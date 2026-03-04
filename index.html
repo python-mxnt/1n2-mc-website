@@ -20,7 +20,34 @@
     <a class="button-link" href="rules/rules.html">rules</a>
 </div>
 
+<div id="countdown" aria-live="polite">
+    <h2>countdown to march 6</h2>
+    <div class="countdown-value" id="countdown-value">loading...</div>
+</div>
+
 <div class="watermark">website by matthew, server made run by luke, lucian, matthew</div>
+
+<script>
+const targetDate = new Date("2026-03-06T00:00:00Z");
+
+function updateCountdown() {
+  const now = new Date();
+  let diff = targetDate - now;
+
+  if (diff < 0) diff = 0;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("countdown-value").textContent =
+    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
 
 </body>
 </html>

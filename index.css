@@ -50,6 +50,32 @@ body {
     z-index: 1;
 }
 
+#countdown {
+    position: fixed;
+    left: 24px;
+    top: 180px;
+    background: #ffffff;
+    padding: 1rem 1.2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    font-family: "Varela Round", sans-serif;
+    color: #111;
+    z-index: 1;
+    text-align: left;
+}
+
+#countdown h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+.countdown-value {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
 .buttons button {
     font-size: 1.1rem;
     padding: 0.9rem 1.6rem;
@@ -122,4 +148,13 @@ body {
     pointer-events: none;
     user-select: none;
     z-index: 1;
+}
+
+@media (max-width: 700px) {
+    #countdown {
+        position: static;
+        margin: 0 auto 2rem;
+        width: min(90%, 420px);
+        text-align: center;
+    }
 }
