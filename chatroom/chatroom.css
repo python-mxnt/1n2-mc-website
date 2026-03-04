@@ -60,7 +60,7 @@ p {
     overflow: hidden;
 }
 
-.chatroom-frame iframe {
+#tlkio {
     width: 100%;
     height: 80vh;
     min-height: 720px;
@@ -71,6 +71,8 @@ p {
 
 .apologie1 {
     text-align: center;
+    bottom: 0;
+    margin-bottom: 1rem;
 }
 
 .chatroom-credit {
