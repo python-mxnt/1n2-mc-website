@@ -5,6 +5,9 @@ const input = document.getElementById("chat-input");
 const log = document.getElementById("chat-log");
 const sendButton = document.getElementById("send-button");
 
+const history = [];
+const MAX_TURNS = 8;
+
 function addMessage(text, role) {
     const message = document.createElement("div");
     message.className = `message ${role}`;
@@ -13,8 +16,15 @@ function addMessage(text, role) {
     log.scrollTop = log.scrollHeight;
 }
 
+function buildPrompt() {
+    const recent = history.slice(-MAX_TURNS * 2);
+    return recent
+        .map((entry) => `${entry.role.toUpperCase()}: ${entry.content}`)
+        .join("\n");
+}
+
 async function fetchReply(message) {
-    const body = JSON.stringify({ prompt: message });
+    const body = JSON.stringify({ prompt: buildPrompt() });
 
     const response = await fetch(API_URL, {
         method: "POST",
@@ -42,6 +52,7 @@ form.addEventListener("submit", async (event) => {
     if (!message) return;
 
     addMessage(message, "user");
+    history.push({ role: "user", content: message });
     input.value = "";
     input.focus();
 
@@ -53,6 +64,7 @@ form.addEventListener("submit", async (event) => {
         const typing = log.querySelector(".message.system:last-child");
         if (typing) typing.remove();
         addMessage(reply, "ai");
+        history.push({ role: "assistant", content: reply });
     } catch (error) {
         const typing = log.querySelector(".message.system:last-child");
         if (typing) typing.remove();
