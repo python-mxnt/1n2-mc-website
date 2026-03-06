@@ -1,5 +1,6 @@
 const EXAROTON_BASE = "/api/exaroton";
 const SERVER_ID = "2w6bIMJ82X4o9zol";
+let activeServerId = SERVER_ID.trim();
 
 const statusMap = {
     0: "offline",
@@ -35,9 +36,45 @@ async function callApi(path) {
     return json.data;
 }
 
+async function listServers() {
+    return callApi("servers/");
+}
+
+async function getWorkingServerId() {
+    if (!activeServerId) {
+        const servers = await listServers();
+        if (!servers.length) {
+            throw new Error("No servers found for this API token");
+        }
+        activeServerId = servers[0].id;
+        return activeServerId;
+    }
+
+    try {
+        await callApi(`servers/${activeServerId}/`);
+        return activeServerId;
+    } catch (error) {
+        const message = String(error.message || "").toLowerCase();
+        if (!message.includes("server not found")) {
+            throw error;
+        }
+
+        const servers = await listServers();
+        if (!servers.length) {
+            throw new Error("Server not found and no servers are visible for this API token");
+        }
+
+        const fallback = servers[0];
+        activeServerId = fallback.id;
+        note.textContent = `configured id not found, switched to ${fallback.name} (${fallback.id})`;
+        return activeServerId;
+    }
+}
+
 async function refreshServer() {
     note.textContent = "loading server info...";
-    const data = await callApi(`servers/${SERVER_ID}/`);
+    const serverId = await getWorkingServerId();
+    const data = await callApi(`servers/${serverId}/`);
 
     const statusLabel = statusMap[data.status] || `status ${data.status}`;
     statusEl.textContent = statusLabel;
@@ -50,7 +87,8 @@ async function refreshServer() {
 
 async function runAction(action) {
     note.textContent = `${action}...`;
-    await callApi(`servers/${SERVER_ID}/${action}/`);
+    const serverId = await getWorkingServerId();
+    await callApi(`servers/${serverId}/${action}/`);
     await refreshServer();
 }
 
