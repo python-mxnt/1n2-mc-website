@@ -1,4 +1,4 @@
-const EXAROTON_BASE = "/api/exaroton?path=";
+const EXAROTON_BASE = "/api/exaroton";
 const SERVER_ID = "2w6bIMJ82X4o9zol";
 
 const statusMap = {
@@ -23,7 +23,9 @@ const versionEl = document.getElementById("server-version");
 const actionButtons = document.querySelectorAll(".server-actions button");
 
 async function callApi(path) {
-    const response = await fetch(`${EXAROTON_BASE}${path}`);
+    const normalizedPath = path.replace(/^\/+/, "");
+    const query = new URLSearchParams({ path: normalizedPath });
+    const response = await fetch(`${EXAROTON_BASE}?${query.toString()}`);
     const json = await response.json();
 
     if (!json.success) {
@@ -35,7 +37,7 @@ async function callApi(path) {
 
 async function refreshServer() {
     note.textContent = "loading server info...";
-    const data = await callApi(`/servers/${SERVER_ID}`);
+    const data = await callApi(`servers/${SERVER_ID}/`);
 
     const statusLabel = statusMap[data.status] || `status ${data.status}`;
     statusEl.textContent = statusLabel;
@@ -48,7 +50,7 @@ async function refreshServer() {
 
 async function runAction(action) {
     note.textContent = `${action}...`;
-    await callApi(`/servers/${SERVER_ID}/${action}/`);
+    await callApi(`servers/${SERVER_ID}/${action}/`);
     await refreshServer();
 }
 
