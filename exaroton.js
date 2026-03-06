@@ -1,5 +1,5 @@
 const EXAROTON_BASE = "/api/exaroton";
-const SERVER_ID = "2w6bIMJ82X4o9zol";
+const SERVER_ID = "ZRjrKM5sbeLNYmjZ";
 let activeServerId = SERVER_ID.trim();
 
 const statusMap = {
