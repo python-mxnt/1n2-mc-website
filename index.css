@@ -205,6 +205,58 @@ body {
     font-size: 0.95rem;
 }
 
+.server-details .detail span:last-child {
+    text-align: right;
+}
+
+#server-status {
+    font-weight: 700;
+}
+
+#server-status[data-state="online"] {
+    color: #0f8a2e;
+}
+
+#server-status[data-state="offline"],
+#server-status[data-state="crashed"] {
+    color: #b11e1e;
+}
+
+#server-status[data-state="starting"],
+#server-status[data-state="stopping"],
+#server-status[data-state="restarting"],
+#server-status[data-state="saving"],
+#server-status[data-state="loading"],
+#server-status[data-state="pending"],
+#server-status[data-state="transferring"],
+#server-status[data-state="preparing"] {
+    color: #9b5f00;
+}
+
+.server-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.7rem;
+    font-size: 0.9rem;
+}
+
+.server-autorefresh {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    cursor: pointer;
+}
+
+.server-autorefresh input {
+    accent-color: #111;
+}
+
+.server-updated {
+    color: rgba(0, 0, 0, 0.62);
+}
+
 .server-note {
     margin: 0;
     color: rgba(0, 0, 0, 0.55);
@@ -231,5 +283,10 @@ body {
         margin: 0 auto 2rem;
         width: min(90%, 420px);
         text-align: center;
+    }
+
+    .server-meta {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
